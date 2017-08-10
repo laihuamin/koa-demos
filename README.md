@@ -137,3 +137,19 @@ app.use(route.get('/', main)); // 同上
 app.use(main);
 app.listen(3000);
 ```
+## demo07: logger
+```
+const Koa = require('koa')
+const app = new Koa();
+
+const main = ctx => {
+    console.log(`${Date.now()} ${ctx.request.method} ${ctx.request.url}`);
+    ctx.response.body = 'Hello World';
+}
+
+app.use(main);
+app.listen(3000);
+```
+run demo
+visit http://127.0.0.1:3000
+you can see logger in shell
