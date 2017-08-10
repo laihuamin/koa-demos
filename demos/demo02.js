@@ -6,4 +6,5 @@ const main = ctx => {
 }
 
 app.use(main);
+console.log(app);
 app.listen(3000);
