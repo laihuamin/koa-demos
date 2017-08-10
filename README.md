@@ -176,3 +176,43 @@ app.use(main);
 
 app.listen(3000);
 ```
+## demo09: middleware stack
+Multi middlewares form a middle stack. The most outer middleware is executed first, then passes the execution to the next middleware. And the most inner middleware is executed last, then returns the execution to the previous middleware. It is just like a first-in-last-out stack.
+```
+const Koa = require('koa');
+const app = new Koa();
+
+const one = (ctx,next) => {
+    console.log('<<one');
+    next();
+    console.log('one>>');
+}
+
+const two = (ctx,next) => {
+    console.log('<<two');
+    next();
+    console.log('two>>');
+}
+
+const three = (ctx, next) => {
+    console.log('<<three');
+    next();
+    console.log('three>>');
+}
+
+app.use(one);
+app.use(two);
+app.use(three);
+
+app.listen(3000);
+```
+run demo
+you can see the result in terminal
+```
+<<one
+<<two
+<<three
+three>>
+two>>
+one>>
+```
