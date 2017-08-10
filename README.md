@@ -57,3 +57,39 @@ const main = ctx => {
 app.use(main);
 app.listen(3000); //app监听3000端口
 ```
+## demo04
+```
+const fs = require('fs');  
+//fs是一个文件系统模块，负责读写文件
+const Koa = require('koa');
+const app = new Koa();
+
+const main = ctx => {
+    ctx.response.type = 'html';
+    ctx.response.body = fs.createReadStream('./demos/template.html');
+}
+
+app.use(main);
+app.listen(3000);
+```
+<b>fs introduce</b>
+```
+//读取文件
+fs.readFile('文件名', '编码形式', function (err, data){
+    if(err){
+        console.log(err);
+    }else{
+        console.log(data)
+    }
+    //当没有发生错误时err为null，打印data，当发生错误时，打印err，data为undefined
+})
+//同步读取文件 ———— readFileSync方法替换readFile方法
+//写文件
+fs.writeFile('文件名',data,function(err){
+    if(err){
+        console.log(err)
+    }else{
+        console.log('OK')
+    }
+})
+```
