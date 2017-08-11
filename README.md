@@ -302,3 +302,21 @@ app.listen(3000);
 ```
 run demo
 visit http://127.0.0.1:3000 you can see Internet server error in the page
+## demo15: 404 error
+```
+const Koa = require('koa');
+const app = new Koa();
+
+const main = ctx => {
+    ctx.response.status = 404;  //显示状态码404
+    ctx.response.body = 'Page Not Found';
+}
+
+app.use(main);
+
+app.listen(3000);
+```
+useing ctx.response.status as same as ctx.throw()
+run demo
+visit http://127.0.0.1:3000 you can see Page Not Found in page
+you can open NetWork you can see status 404
