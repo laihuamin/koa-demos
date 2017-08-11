@@ -320,3 +320,31 @@ useing ctx.response.status as same as ctx.throw()
 run demo
 visit http://127.0.0.1:3000 you can see Page Not Found in page
 you can open NetWork you can see status 404
+## demo16: error handle
+this middleware in the top to catch error which is thrown in the end
+```
+const Koa = require('koa');
+const app = new Koa();
+
+const handle = async (ctx, next) => {
+    try{
+        await next()
+    }catch(err){
+        ctx.response.status = err.statusCode | err.status | 500;
+        ctx.response.body = {
+            'message': err.message
+        }
+    }
+}
+
+const main = ctx => {
+    ctx.throw(500);
+}
+
+app.use(handle);
+app.use(main);
+
+app.listen(3000);
+```
+run demo
+visit http://127.0.0.1:3000 you can see {"message": "Internet server error"} in the page
