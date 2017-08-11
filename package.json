@@ -14,5 +14,8 @@
     "fs.promised": "^3.0.0",
     "koa": "^2.3.0",
     "koa-route": "^3.2.0"
+  },
+  "dependencies": {
+    "koa-compose": "^4.0.0"
   }
 }
