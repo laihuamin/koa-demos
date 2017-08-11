@@ -288,3 +288,17 @@ app.listen(3000);
 ```
 run demo
 visit http://127.0.0.1:3000/redirect then will redirect to http://127.0.0.1:3000
+## demo14: 500 error
+```
+const Koa = require('koa');
+const app = new Koa();
+
+const main = ctx => {
+    throw(500);
+}
+
+app.use(main);
+app.listen(3000);
+```
+run demo
+visit http://127.0.0.1:3000 you can see Internet server error in the page
