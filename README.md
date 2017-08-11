@@ -250,4 +250,17 @@ app.use(middlewares);
 
 app.listen(3000);
 ```
+## demo12: static server
+```
+const Koa = require('koa');
+const app = new Koa();
+const path = require('path');
+const serve = require('koa-static');
 
+const main = serve(path.join(__dirname));
+
+app.use(main);
+app.listen(3000);
+```
+run demo
+then open http://127.0.0.1:3000/demo12.js , you can see this shell
