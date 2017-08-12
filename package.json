@@ -16,6 +16,7 @@
     "koa-route": "^3.2.0"
   },
   "dependencies": {
+    "koa-body": "^2.3.0",
     "koa-compose": "^4.0.0",
     "koa-static": "^4.0.1"
   }
