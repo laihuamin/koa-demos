@@ -366,3 +366,53 @@ app.use(main);
 
 app.listen(3000);
 ```
+## demo18: error emitting
+```
+const Koa = require('koa');
+const app = new Koa();
+//handle中间件可以用app.emit来派发自定义事件
+const handle = async (ctx, next) => {
+    try{
+        await next();
+    }catch(err){
+        ctx.response.status = err.statusCode | err.status | 500;
+        ctx.response.type = 'html';
+        ctx.response.body = '<p>something error, you should concat adminster</p>'
+        ctx.app.emit('error', err, ctx);
+    }
+}
+
+const main = ctx => {
+    ctx.throw(500);
+}
+／／app.on可以用来接受自定义事件
+app.on('err', function(err){
+    console.log(err);
+    console.log('logger error', err.message);
+});
+
+app.use(handle);
+app.use(main);
+
+app.listen(3000);
+```
+run demo
+visit http://127.0.0.1:3000
+## demo19: cookies
+```
+const Koa = require('koa');
+const app = new Koa();
+
+const main = ctx => {
+    const n = Number(ctx.cookies.get('view') || 0) + 1;
+    ctx.cookies.set('view', n);
+    ctx.response.body = n + 'view';
+}
+
+app.use(main);
+app.listen(3000);
+```
+you can ascess cookies.get() method to get this value,
+then you can asscess cookise.set() method to set this value
+run demo
+visit http://127.0.0.1:3000 
