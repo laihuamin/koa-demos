@@ -348,3 +348,21 @@ app.listen(3000);
 ```
 run demo
 visit http://127.0.0.1:3000 you can see {"message": "Internet server error"} in the page
+## demo17: error listen
+```
+const Koa = require('koa');
+const app = new Koa();
+
+const main = ctx => {
+    ctx.throw(500)
+}
+//监听error，可以在控制台看见server error
+app.on('error', (error, ctx) => {
+    console.error('server error', error);
+});
+
+
+app.use(main);
+
+app.listen(3000);
+```
